@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<title>Real Time Updating Map</title>
+
+<!-- Addning Leaflet Style Sheets -->
+<link rel="stylesheet" href="CSS/leaflet.css" />
+
+</head>
+<style>
+    body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+}
+    </style>
+<body>
+    <div id="map"></div>
+<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+
+<script type="application/javascript">
+
+    var mapOptions = {
+zoom: 5,
+center: new google.maps.LatLng(34, 25),
+mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+ 
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+ function getLocation() 
+        {
+            if (navigator.geolocation) 
+            {
+                navigator.geolocation.getCurrentPosition(displayPosition,showError, {
+                    enableHighAccuracy : true,
+                    timeout : Infinity,
+                    maximumAge : 0
+                });
+            } 
+            else
+            { 
+                alert("Geolocation is not supported by this browser.");
+            }
+        }       
+        var marker;
+
+        function displayPosition(position)
+        {
+            // set current position
+            showPosition(position);
+            // watch position
+            watchCurrentPosition();
+        }           
+
+        function showPosition(position)
+        {
+        marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(
+                position.coords.latitude,
+                position.coords.longitude
+            ),
+            title: "Current Position"
+        });
+            map.setZoom(17);
+        map.panTo(new google.maps.LatLng(
+                position.coords.latitude,
+                position.coords.longitude
+            ));    
+        }
+
+        // Save Position Coordinates        
+        var path = [];
+
+
+        function watchCurrentPosition()
+        {     
+            var positionTimer = navigator.geolocation.watchPosition(
+                function (position) {
+                    path.push(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+
+                    var polyline = new google.maps.Polyline({
+                        map: map,
+                        path: path,
+                        strokeColor: '#B22222',
+                        strokeOpacity: 0.7,
+                        strokeWeight: 5
+                    });
+
+                    setMarkerPosition(
+                        marker,
+                        position
+                    );
+                });
+        }
+
+
+        function setMarkerPosition(marker, position) {
+            
+            marker.setPosition(
+                new google.maps.LatLng(
+                    position.coords.latitude,
+                    position.coords.longitude)
+            );
+            map.panTo(marker.position);
+
+        }
+
+    function showError(error) {
+        // tell the user if the current position could not be located
+        alert("The current position could not be found!");
+    }
+    getLocation();
+
+    </script>
+</body>
+</html>
