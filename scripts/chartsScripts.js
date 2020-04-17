@@ -26,14 +26,14 @@ function createOrUpdateTotalPieChart(country) {
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
-      margin: [60, 0, 0, 0],
+      margin: [50, 0, 0, 0],
 
       plotShadow: false,
       type: "pie"
     },
     title: {
       align: "center",
-      text: `Total :${chartData.total} <br/> ${chartData.days} days since first infection`,
+      text: `Total :${chartData.total} <br/> ${chartData.days} days reported`,
       style: {
         fontWeight: "bold"
       }

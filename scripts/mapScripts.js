@@ -55,7 +55,7 @@ Highcharts.theme = {
     style: {
       color: "#E0E0E3",
       textTransform: "uppercase",
-      fontSize: "20px"
+      fontSize: "16px"
     }
   },
   subtitle: {
@@ -434,6 +434,7 @@ function generateMap(csv, dates) {
 
   // Initiate the map chart
   mapChart = Highcharts.mapChart("map", {
+    legend: { align: "left" },
     title: {
       text:
         "<b>Total confirmed cases</b><br/><p style='font-size:11px'>Last day reported : " +
@@ -509,28 +510,32 @@ function generateMap(csv, dates) {
 //handle globl
 function selectCountry(code2) {
   if (code2) {
-    mapChart.get(code2.toLowerCase()).select();
-    mapChart.get(code2.toLowerCase()).zoomTo();
-    mapChart.mapZoom(2);
-  }
-  confirmedChart = updateChart(
-    confirmedChart,
-    "confirmed",
-    "Confirmed",
+    let countryName = "global";
+    if (code2 == "global") {
+      mapChart.zoom();
+      if (mapChart.getSelectedPoints().length)
+        mapChart.get(mapChart.getSelectedPoints()[0].id).select(false);
+    } else {
+      if (isoCountries.some(e => e.id == code2))
+        countryName = isoCountries.find(e => e.id == code2).text;
+      mapChart.get(code2.toLowerCase()).select();
+      mapChart.get(code2.toLowerCase()).zoomTo();
+      mapChart.mapZoom(2);
+    }
 
-    isoCountries.find(e => e.id == code2).text
-  );
-  recoverdChart = updateChart(
-    recoverdChart,
-    "recovered",
-    "Recovered",
-    isoCountries.find(e => e.id == code2).text
-  );
-  deathChart = updateChart(
-    deathChart,
-    "deaths",
-    "Deaths",
-    isoCountries.find(e => e.id == code2).text
-  );
-  createOrUpdateTotalPieChart(isoCountries.find(e => e.id == code2).text);
+    confirmedChart = updateChart(
+      confirmedChart,
+      "confirmed",
+      "Confirmed",
+      countryName
+    );
+    recoverdChart = updateChart(
+      recoverdChart,
+      "recovered",
+      "Recovered",
+      countryName
+    );
+    deathChart = updateChart(deathChart, "deaths", "Deaths", countryName);
+    createOrUpdateTotalPieChart(countryName);
+  }
 }
