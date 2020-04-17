@@ -1,0 +1,115 @@
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1"
+/>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,300&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+
+<link rel="stylesheet" href="styles/select2.min.css" type="text/css" />
+<link rel="stylesheet" href="styles/styles.css" type="text/css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"
+  type="text/css"
+/>
+
+<html>
+  <body>
+    <div class="container-fluid">
+      <div class="loader"></div>
+      <div class="row title">
+        <div class="col-md col-sm-12 d-flex flex-row" style="color :#ff8640;">
+          <img src="images/covidLogo.png" height="45px" />
+          <h2>Covid-19 global dashboard</h2>
+        </div>
+        <div class="col-md col-sm-12 d-flex flex-row" style="color :#ff8640;">
+          <img src="images/covidLogo.png" height="45px" />
+          <h2>Covid-19 global dashboard</h2>
+        </div>
+        <!-- <div
+          style="font-size: 1.2rem"
+          class="col-md-4 col-sm-12 d-flex flex-md-row flex-sm-column"
+        >
+          <div><b>Infected :</b> 11212121</div>
+          &nbsp;
+
+          <div><b>Recovered :</b> 33333333</div>
+          &nbsp;
+
+          <div><b>Death :</b> 2324424</div>
+          &nbsp;
+        </div> -->
+      </div>
+      <div id="countriesDDContainer">
+        Select country :
+        <select name="country"></select>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-12 p-0" id="map"></div>
+        <div id="piecharts" class="col-md-4 col-sm-12 p-0">
+          <div style="height: 100%" class="col-12 p-0" id="totalPiechart"></div>
+          <!-- <div style="height: 50%" class="col-12 p-0" id="todayPiechart"></div> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="country-chart" class="col-md-8 col-sm-12 p-0">
+          <div id="confirmed-area-chart" class="chart"></div>
+          <div id="recovered-area-chart" class="chart"></div>
+          <div id="deaths-area-chart" class="chart"></div>
+        </div>
+        <div id="twitterContainer" class="col-md-4 col-sm-12 p-0">
+          <!-- <h3 class="twitterTitle">
+            <img src="twitter.png" width="35px" />@WHO
+          </h3> -->
+          <div id="divResults" class="col-12">
+            <a
+              class="twitter-timeline"
+              data-theme="dark"
+              href="https://twitter.com/amrabdelazizdev/lists/covid19?ref_src=twsrc%5Etfw"
+            ></a>
+            <script
+              async
+              src="https://platform.twitter.com/widgets.js"
+              charset="utf-8"
+            ></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  crossorigin="anonymous"
+></script>
+
+<script src="scripts/select2.min.js"></script>
+<script src="scripts/dataFixes.js"></script>
+
+<script src="scripts/countries.js"></script>
+<script src="scripts/CountriesDD.js"></script>
+<script src="scripts/mapScripts.js"></script>
+<script src="scripts/chartsScripts.js"></script>
