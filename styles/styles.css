@@ -42,7 +42,7 @@
 
 #map,
 #piecharts {
-    height: 48.7vh;
+    height: 49.5vh;
 
 }
 
@@ -123,4 +123,23 @@
     position: absolute;
     z-index: 999;
     color: white
+}
+
+.creditsTooltip {
+    text-align: left;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+#credits {
+    margin-top: 7px;
+    color: #ff8640;
 }

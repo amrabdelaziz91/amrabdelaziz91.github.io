@@ -1,4 +1,8 @@
 window.covidDataset = null;
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function setDDPosition() {
   let mapTop = $("#map").position().top;
   $("#countriesDDContainer").css("top", `${mapTop + 10} px`);
@@ -434,15 +438,13 @@ function generateMap(csv, dates) {
 
   // Initiate the map chart
   mapChart = Highcharts.mapChart("map", {
-    legend: { align: "left" },
-    title: {
-      text:
-        "<b>Total confirmed cases</b><br/><p style='font-size:11px'>Last day reported : " +
-        dates[dates.length - 1] +
-        "</p>",
-      align: "right",
-      y: $("#map").height() * 0.9
+    legend: {
+      align: "left",
+      title: {
+        text: "<b>Total confirmed cases</b>"
+      }
     },
+    title: { text: "" },
 
     mapNavigation: {
       enabled: true,
@@ -465,9 +467,15 @@ function generateMap(csv, dates) {
         return `<b style="text-align:center">
         ${this.point.name}</b><br/><br/>
         <ul style="text-align:center">
-        <li style="color:#3f51b5">Confirmed : ${this.point.value}</li><br/>
-        <li style="color:green">Recovered : ${this.point.recovered}</li><br/>
-        <li style="color:red">Deaths :  ${this.point.deaths}</li><br/>
+        <li style="color:#3f51b5">Confirmed : ${numberWithCommas(
+          this.point.value
+        )}</li><br/>
+        <li style="color:green">Recovered : ${numberWithCommas(
+          this.point.recovered
+        )}</li><br/>
+        <li style="color:red">Deaths :  ${numberWithCommas(
+          this.point.deaths
+        )}</li><br/>
         </ul> <br/><br/>
         '<span style="font-size: 10px">(Click for details)</span>'`;
       }

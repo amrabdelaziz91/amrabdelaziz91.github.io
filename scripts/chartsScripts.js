@@ -33,7 +33,9 @@ function createOrUpdateTotalPieChart(country) {
     },
     title: {
       align: "center",
-      text: `Total :${chartData.total} <br/> ${chartData.days} days reported`,
+      text: `Total confirmed cases : ${numberWithCommas(
+        chartData.total
+      )} <br/> ${chartData.days} days reported`,
       style: {
         fontWeight: "bold"
       }
@@ -68,77 +70,7 @@ function createOrUpdateTotalPieChart(country) {
     ]
   });
 }
-
-// totalPieChart.series[0].update(
-//   {
-//     name: "Cases",
-//     data: [
-//       {
-//         name: "Chrome",
-//         y: 61.41
-//       },
-//       {
-//         name: "Internet Explorer",
-//         y: 11.84
-//       },
-//       {
-//         name: "Firefox",
-//         y: 10.85
-//       },
-//       {
-//         name: "Edge",
-//         y: 4.67
-//       },
-//       {
-//         name: "Safari",
-//         y: 4.18
-//       },
-//       {
-//         name: "Other",
-//         y: 7.05
-//       }
-//     ]
-//   },
-//   true
-// );
-// var todayPieChart = Highcharts.chart("todayPiechart", {
-//   chart: {
-//     plotBackgroundColor: null,
-//     plotBorderWidth: null,
-//     margin: 0,
-
-//     plotShadow: false,
-//     type: "pie"
-//   },
-//   title: {
-//     align: "right",
-//     text: "14-4-2020",
-//     style: {
-//       fontWeight: "bold"
-//     }
-//   },
-//   tooltip: {
-//     pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>"
-//   },
-//   accessibility: {
-//     point: {
-//       valueSuffix: "%"
-//     }
-//   },
-//   plotOptions: {
-//     pie: {
-//       allowPointSelect: true,
-//       cursor: "pointer",
-//       dataLabels: {
-//         enabled: true,
-//         format: "<b>{point.name}</b>: {point.percentage:.1f} %",
-//         connectorColor: "silver"
-//       }
-//     }
-//   },
-//   series: [{}]
-// });
-/*                           The  Three charts                            */
+/*                         The  Three charts                            */
 var confirmedChart = null;
 var recoverdChart = null;
 var deathChart = null;
@@ -240,13 +172,14 @@ var chartColors = {
 
 function createOrUpdateLineChart(dataKey, name, country, chartObj) {
   //initially add global data
-  let dates = covidDataset[Object.keys(covidDataset)[0]].map(e => e.date);
 
+  let chartData = getLineChartData(dataKey, country);
   var dataset = {
     name: name,
-    data: getLineChartData(dataKey, country),
+    data: chartData,
     type: "area"
   };
+  let dates = chartData.map(e => e[0]);
   console.log(dataset);
   var chartDiv = document.getElementById(dataKey + "-area-chart");
   //   chartDiv.className = "chart";
@@ -301,7 +234,7 @@ function createOrUpdateLineChart(dataKey, name, country, chartObj) {
         };
       },
       formatter: function() {
-        return `<b>[${dates[this.x]}]</b> : ${this.y}`;
+        return `<b>[${dates[this.x]}]</b> : ${numberWithCommas(this.y)}`;
       },
       borderWidth: 0,
       backgroundColor: "none",
@@ -316,7 +249,7 @@ function createOrUpdateLineChart(dataKey, name, country, chartObj) {
     series: [
       {
         marker: {
-          enabled: false
+          enabled: true
         },
         data: dataset.data,
         name: dataset.name,

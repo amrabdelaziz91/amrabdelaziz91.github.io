@@ -10,17 +10,35 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"
   type="text/css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  type="text/css" />
 
 <html>
 
 <body>
   <div class="container-fluid">
     <div class="loader"></div>
+    <div id="creditsContent" style="display: none">
+      <ul style="text-align: left ; ">
+        <li><b>Data Source :</b> <a href='https://github.com/CSSEGISandData/COVID-19' target='_blank'>Johns Hopkins
+            University</a></li>
+
+        <li><a href='mailto:amr.abdelaziz.91@gmail.com'> Email Developer / Report Bug </a></li>
+        <li> Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href='mailto:amr.abdelaziz.91@gmail.com'>Amr
+            Abdelaziz</a></li>
+      </ul>
+    </div>
     <div class="row title">
-      <div class="col-md col-sm-12 d-flex flex-row" style="color :#ff8640;">
+      <div class="col-md-11 col-sm-11 d-flex flex-row" style="color :#ff8640;">
         <img src="images/covidLogo.png" height="45px" />
         <h2>Covid-19 global dashboard</h2>
+        <button id="credits" type="button" class="btn btn-secondary btn-circle" title="credits" data-html="true">
+          <i class="fa fa-info" aria-hidden="true"></i>
+        </button>
       </div>
+
+
+
 
       <!-- <div
           style="font-size: 1.2rem"
@@ -86,3 +104,8 @@
 <script src="scripts/CountriesDD.js"></script>
 <script src="scripts/mapScripts.js"></script>
 <script src="scripts/chartsScripts.js"></script>
+<script>
+  $("#credits").popover({
+    content: $('#creditsContent').html()
+  });
+</script>
