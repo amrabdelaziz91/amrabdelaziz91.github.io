@@ -33,9 +33,7 @@ function createOrUpdateTotalPieChart(country) {
     },
     title: {
       align: "center",
-      text: `Total confirmed cases : ${numberWithCommas(
-        chartData.total
-      )} <br/> ${chartData.days} days reported`,
+      text: `Total confirmed cases : ${numberWithCommas(chartData.total)}`, // <br/> ${chartData.days} days reported`,
       style: {
         fontWeight: "bold"
       }
