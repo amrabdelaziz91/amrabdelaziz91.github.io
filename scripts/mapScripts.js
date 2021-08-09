@@ -392,7 +392,8 @@ function generateMap(csv, dates) {
   // For each country, use the latest value for current population
   var data = [];
   for (var code3 in countries) {
-    if (countries.hasOwnProperty(code3)) {
+	  
+    if (countries.hasOwnProperty(code3) && countries[code3]) {
       var value = null,
         year,
         itemData = countries[code3].data,
@@ -435,7 +436,7 @@ function generateMap(csv, dates) {
     this.id = this.properties["hc-key"]; // for Chart.get()
     this.flag = this.id.replace("UK", "GB").toLowerCase();
   });
-
+debugger;
   // Initiate the map chart
   mapChart = Highcharts.mapChart("map", {
     legend: {
@@ -484,7 +485,7 @@ function generateMap(csv, dates) {
 
     series: [
       {
-        data: data,
+        data: data.filter(e=>e.name&&e.value&&e.value>0),
         mapData: mapData,
         joinBy: ["iso-a3", "code3"],
         name: "Confirmed",
